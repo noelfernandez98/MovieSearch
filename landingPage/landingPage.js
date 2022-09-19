@@ -1,18 +1,20 @@
 let submitBtn = document.getElementById("submitBtn");
 let input = document.getElementById("search");
-let str = "tokyoDrift";
 
-
-//we check if the input is more than one word, if so we translate the title to url code format by adding %20(space).
-let newStr = ""
-if (str.split(" ").length > 1) {
-    str = str.split(" ");
-    for (let i = 0; i < str.length - 1; i++) {
-        newStr += (str[i] + "%20");
+//This function checks the given inputValue and converts it to URL code format if spaces are present
+const strWithUrlFormat = (inputValue) => {
+    let str = inputValue;
+    let newStr = "";
+    if (str.split(" ").length > 1) {
+        str = str.split(" ");
+        for (let i = 0; i < str.length - 1; i++) {
+            newStr += (str[i] + "%20");
+        }
+        newStr += str[str.length - 1];
     }
-    newStr += str[str.length - 1];
+    if (newStr.length > 0) str = newStr
+    return str
 }
-if(newStr.length > 0) str = newStr
 
 // Fetch possible movie title results
 const fetchData = (string) => {
@@ -23,7 +25,7 @@ const fetchData = (string) => {
 
             // Console.log all title name results up to 10 
             let length = 10 < response.results.length ? 10 : response.results.length;
-            for (let i = 0; i <= length ; i++) {
+            for (let i = 0; i <= length; i++) {
                 console.log(response.results[i].name);
             }
         })
@@ -31,9 +33,11 @@ const fetchData = (string) => {
 
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    str = input.value;
-    console.log(input.value);
+    str = strWithUrlFormat(input.value)
+    console.log(str);
     fetchData(str);
 })
+
+
 
 // fetchData();
