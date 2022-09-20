@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -33,7 +35,7 @@ border-radius: 25px;
 
 .logo_container{
     height: 100%;
-    display: flex;
+    
     justify-content: center;
     
 } 
@@ -51,7 +53,7 @@ height: 111px;
 left: 500px;
 top: 5px;
 
-font-family: 'Bangers';
+font-family: Bangers;
 font-style: normal;
 font-weight: 400;
 font-size: 60px;
@@ -62,6 +64,10 @@ align-items: center;
 
 color: #FF0000;
 
+}
+
+#S{
+    color: white;
 }
 
 
@@ -81,4 +87,23 @@ left: 300px;
 top: 286px;
 background-color: #4F4634;
 
+  }
+  
+  #search{
+    position: absolute;
+    margin-left: 25%;
+    width: 430px;
+height: 38px;
+border-radius: 25px;
+margin-top: 180px;
+  }
+
+  #submitBtn{
+    position: absolute;
+    margin-left: 55.5%;
+    
+height: 30px;
+width: 60px;
+border-radius: 50%;
+margin-top: 186px;
   }
