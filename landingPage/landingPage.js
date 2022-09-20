@@ -34,7 +34,7 @@ if (navigator.geolocation) {
 
         // Fetch possible movie title results
         const fetchData = (string) => {
-            fetch(`https://api.watchmode.com/v1/autocomplete-search/?apiKey=g7hJI9XVOqZCYV3Uv0RLX8evqs1y6KrU96V2B3n5&search_field=name&search_value=${string}`)
+            fetch(`https://api.watchmode.com/v1/autocomplete-search/?apiKey=F8bvpNfGuiLrKih9wwtdXGDqkiodX6pk98ZGyCXE&search_field=name&search_value=${string}`)
                 .then(data => data.json())
                 .then(response => {
                     console.log(response.results); // Entire response array with results
@@ -54,7 +54,7 @@ if (navigator.geolocation) {
         }
 
         const fetchTitleDetails = (titleId, parent) => {
-            fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=g7hJI9XVOqZCYV3Uv0RLX8evqs1y6KrU96V2B3n5&append_to_response=sources`)
+            fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=F8bvpNfGuiLrKih9wwtdXGDqkiodX6pk98ZGyCXE&append_to_response=sources`)
                 .then(data => data.json())
                 .then(response => {
                     console.log(response)
