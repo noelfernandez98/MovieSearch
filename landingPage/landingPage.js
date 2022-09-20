@@ -60,7 +60,7 @@ if (navigator.geolocation) {
                     console.log(response)
                     let titleSourcesList = document.createElement("ul")
                     let length = 4 < response.sources.length ? 4 : response.sources.length;
-                    for (let i = 0; i <= length; i++) {
+                    for (let i = 0; i < length; i++) {
                         let titleSource = document.createElement("li")
                         titleSource.innerText = response.sources[i].name
                         titleSourcesList.appendChild(titleSource)
@@ -72,21 +72,15 @@ if (navigator.geolocation) {
                     parent.append(titleSourcesList, titleRating, imgIcon)
                     console.log(titleSourcesList)
                     console.log(titleRating)
-
-
-
-                    // Event Listener for Submit Button
-                    submitBtn.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        str = strWithUrlFormat(input.value)
-                        console.log(str);
-                        fetchData(str);
-                    })
-
-
                 })
 
         }
-
-    }
-)}
+        // Event Listener for Submit Button
+        submitBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            str = strWithUrlFormat(input.value)
+            console.log(str);
+            fetchData(str);
+        })
+    })
+}
