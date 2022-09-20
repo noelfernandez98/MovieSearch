@@ -28,12 +28,13 @@ const fetchData = (string) => {
             // Console.log all title name results up to 10 
             let length = 10 < response.results.length ? 10 : response.results.length;
             for (let i = 0; i < length; i++) {
+                let id = response.results[i].id
+                console.log(id)
                 let titleName = document.createElement("li")
                 titleName.innerText = response.results[i].name
                 searchResults.appendChild(titleName)
-                let id =
-
                 console.log(response.results[i].name);
+                fetchTitleDetails(id)
             }
         })
 }
@@ -53,5 +54,3 @@ submitBtn.addEventListener("click", (e) => {
     console.log(str);
     fetchData(str);
 })
-
-
