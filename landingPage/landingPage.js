@@ -2,6 +2,20 @@
 let submitBtn = document.getElementById("submitBtn");
 let input = document.getElementById("search");
 let searchResults = document.getElementById("search-results")
+let str = "tokyoDrift";
+let newStr = ""
+let countryCode;
+
+//get user location for region results
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+        console.log('My General Position:', position);
+        const long = position.coords.longitude.toString();
+        const lat = position.coords.latitude.toString();
+        const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude${long}&localityLanguage=en`;
+        fetch(geoApiUrl)
+            .then(res => res.json())
+            .then(data => countryCode = data.countryCode)
 
 //This function checks the given inputValue and converts it to URL code format if spaces are present
 const strWithUrlFormat = (inputValue) => {
@@ -58,13 +72,19 @@ const fetchTitleDetails = (titleId, parent) => {
             parent.append(titleSourcesList, titleRating, imgIcon)
             console.log(titleSourcesList)
             console.log(titleRating)
-        })
-}
 
-// Event Listener for Submit Button
-submitBtn.addEventListener("click", (e) => {
+
+
+        // Event Listener for Submit Button
+        submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
     str = strWithUrlFormat(input.value)
     console.log(str);
     fetchData(str);
 })
+
+
+    })
+        
+}
+
