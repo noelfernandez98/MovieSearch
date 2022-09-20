@@ -34,17 +34,31 @@ const fetchData = (string) => {
                 titleName.innerText = response.results[i].name
                 searchResults.appendChild(titleName)
                 console.log(response.results[i].name);
-                fetchTitleDetails(id)
+                fetchTitleDetails(id, titleName)
             }
         })
 }
 
-const fetchTitleDetails = (titleId) => {
-    fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=g7hJI9XVOqZCYV3Uv0RLX8evqs1y6KrU96V2B3n5`)
-    .then(data => data.json())
-    .then(response => {
-        console.log(response)
-    })
+const fetchTitleDetails = (titleId, parent) => {
+    fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=g7hJI9XVOqZCYV3Uv0RLX8evqs1y6KrU96V2B3n5&append_to_response=sources`)
+        .then(data => data.json())
+        .then(response => {
+            console.log(response)
+            let titleSourcesList = document.createElement("ul")
+            let length = 4 < response.sources.length ? 4 : response.sources.length;
+            for(let i = 0; i <= length; i++) {
+                let titleSource = document.createElement("li")
+                titleSource.innerText = response.sources[i].name
+                titleSourcesList.appendChild(titleSource)
+            }
+            let titleRating = document.createElement("li")
+            let imgIcon = document.createElement("img")
+            titleRating.innerText = response.user_rating
+            imgIcon.src = response.poster
+            parent.append(titleSourcesList, titleRating, imgIcon)
+            console.log(titleSourcesList)
+            console.log(titleRating)
+        })
 }
 
 // Event Listener for Submit Button
