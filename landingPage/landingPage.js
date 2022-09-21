@@ -32,13 +32,21 @@ if (navigator.geolocation) {
             return str
         }
 
+        // This function removes repeated sources from source array 
+        const removeRepeatSources = (source) => {
+            let arr = []
+            for(let i = 0; i < source.length; i++) {
+                if(!arr.includes(source[i].name)) arr.push(source[i].name)
+            }
+            return arr
+        }
+
         // Fetch possible movie title results
         const fetchData = (string) => {
             fetch(`https://api.watchmode.com/v1/autocomplete-search/?apiKey=F8bvpNfGuiLrKih9wwtdXGDqkiodX6pk98ZGyCXE&search_field=name&search_value=${string}`)
                 .then(data => data.json())
                 .then(response => {
                     console.log(response.results); // Entire response array with results
-
                     // Console.log all title name results up to 10 
                     let length = 10 < response.results.length ? 10 : response.results.length;
                     for (let i = 0; i < length; i++) {
@@ -52,17 +60,20 @@ if (navigator.geolocation) {
                     }
                 })
         }
-
+        
+        // Fetch Title Details - Title Source - Title Rating - Title Img Icon
         const fetchTitleDetails = (titleId, parent) => {
             fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=F8bvpNfGuiLrKih9wwtdXGDqkiodX6pk98ZGyCXE&append_to_response=sources`)
                 .then(data => data.json())
                 .then(response => {
                     console.log(response)
+                    let arrSources = removeRepeatSources(response.sources)
+                    console.log(arrSources)
                     let titleSourcesList = document.createElement("ul")
-                    let length = 4 < response.sources.length ? 4 : response.sources.length;
+                    let length = 4 < arrSources.length ? 4 : arrSources.length;
                     for (let i = 0; i < length; i++) {
                         let titleSource = document.createElement("li")
-                        titleSource.innerText = response.sources[i].name
+                        titleSource.innerText = arrSources[i]
                         titleSourcesList.appendChild(titleSource)
                     }
                     let titleRating = document.createElement("li")
