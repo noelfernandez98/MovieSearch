@@ -1,109 +1,183 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     list-style: none;
     text-decoration: none;
 }
 
-.header{
-    position: absolute;
+.header {
+    display: flex;
+    position: relative;
     width: 100%;
+    margin: 0;
+    padding: 0;
     height: 111px;
     left: 0px;
     top: 0px;
-    
+    align-items: center;
+    justify-content: center;
     background: #C0C0C0;
 }
 
-.inner_header{
+.inner_header {
     /* width: 1000px;
     height: 100%; */
     display: block;
     margin: 9px auto;
-    background-color:#4F4634;
+    background-color: #4F4634;
     /* position: center; */
-width: 486px;
-height: 94px;
-/* left: 513px;
-top: 8px; */
-
-background: #4F4634;
-border-radius: 25px;
+    min-width: auto + 20px;
+    width: 25%;
+    height: 94px;
+    /* left: 513px;
+    top: 8px; */
+    background: #4F4634;
+    border-radius: 25px;
 }
 
-.logo_container{
+.logo_container {
     height: 100%;
-    
+    display: flex;
     justify-content: center;
-    
-} 
+    min-width: auto + 20px;
+    /* width: 50%; */
 
-h1{
+}
+
+h1 {
     /* color: white;
     height: 100%;
     display: table-cell;
     vertical-align: middle;
     font-size: 32px; */
-    
-    position: absolute;
-width: 605px;
-height: 111px;
-left: 500px;
-top: 5px;
 
-font-family: Bangers;
-font-style: normal;
-font-weight: 400;
-font-size: 60px;
-line-height: 85px;
-display: flex;
-align-items: center;
-/* text-align: center; */
 
-color: #FF0000;
+
+
+    font-family: Bangers;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 85px;
+    display: flex;
+    align-items: center;
+    /* text-align: center; */
+
+    color: #FF0000;
 
 }
 
-#S{
+#S {
     color: white;
 }
 
 
 
-body{
-    background-color:  #1E1E1E;;
+body {
+    background-color: #1E1E1E;
+    display: block;
+
 }
 
 .boxed {
-    border: 5px solid 
-    #4F4634;
+    border: 5px solid #4F4634;
     justify-content: center;
     position: absolute;
-width: 800px;
-height: 391px;
-left: 300px;
-top: 286px;
-background-color: #4F4634;
+    width: 800px;
+    height: 391px;
+    left: 300px;
+    top: 286px;
+    background-color: #4F4634;
 
-  }
-  
-  #search{
-    position: absolute;
-    margin-left: 25%;
+}
+
+#searchBar {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    border-collapse: collapse;
+
+}
+
+#search {
+    /* position: absolute; */
+    /* display: flex; */
+    justify-content: center;
     width: 430px;
-height: 38px;
-border-radius: 25px;
-margin-top: 180px;
-  }
+    height: 38px;
+    color: white;
+    border-radius: 25px 0px 0px 25px;
+    border: 0 solid black;
+    /* margin-top: 180px; */
+    /* border-collapse: collapse; */
+}
 
-  #submitBtn{
-    position: absolute;
-    margin-left: 55.5%;
-    
-height: 30px;
-width: 60px;
-border-radius: 50%;
-margin-top: 186px;
-  }
+#submitBtn {
+    /* display: flex; */
+    /* justify-content: center; */
+    /* border-collapse: collapse; */
+    justify-content: center;
+    background-color: white;
+    min-height: 38px;
+    min-width: 60px;
+    /* margin-top: -2px; */
+    padding-right: 4px;
+    /* border-radius: 100%; */
+    /* margin-top: 5px; */
+    border: 0 solid black;
+    border-radius: 0px 25px 25px 0px;
+    /* margin-left: 15px; */
+}
+
+#search-results {
+    display: flex;
+    flex-direction: row;
+    /* height: auto;
+    width: auto; */
+    width: 65%;
+    height: 30%;
+    background-color: #4f4634;
+    margin-left: auto;
+    margin-right: auto;
+    /* padding: 30px 70px; */
+    margin-top: 4%;
+    /* border-radius: 25px; */
+    /* text-align: center; */
+}
+
+#title-sources-rating-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #FF0000;
+    /* height: auto;
+    width: auto; */
+    width: 60%;
+    height: 30%;
+}
+
+#movies-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.divs-in-search-results {
+    margin: 5%;
+}
+
+#container-title {
+    /* position: absolute; */
+    /* margin-bottom: 30px; */
+    text-align: center;
+    /* left: 30%; */
+}
+
+/* #box-sources { */
+    /* position: absolute; */
+    /* bottom: 60% */
+
+/* } */

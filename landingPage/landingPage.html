@@ -6,45 +6,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="landingPage.css">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link rel=“preconnect” href=“https://fonts.googleapis.com”>
+    <link rel=“preconnect” href=“https://fonts.gstatic.com” crossorigin>
+    <link href=“https://fonts.googleapis.com/css2?family=Bangers&display=swap” rel=“stylesheet”>
     <title>Document</title>
     <script src="landingPage.js" defer></script>
 </head>
 
 <body>
-
-    <div class="header">
+    <header class="header">
         <div class="inner_header">
             <div class="logo_container">
-                <h1>MOVIE<span id="S">SEARCH</span></h1>
+                <h1 id="M">MOVIE</h1>
+                <h1 id="S">SEARCH</h1>
             </div>
         </div>
-    </div>
+    </header>
+
+
     <form>
-        <div>
-            <label for="search">Search :</label>
+        <div id="searchBar">
             <input type="text" id="search" name="search" size="35" placeholder="Search Movie titles or Actors/Actresses"
                 required>
             <button id="submitBtn">Search</button>
         </div>
-        <div>
-            <ul id="search-results">
-
-            </ul>
-        </div>
     </form>
-    <div class="boxContainer">
-        <table class="elementsContainer">
 
-        </table>
-    </div>
+    <!-- <div id="search-results">
+        Left half of search-results
+        <div id="title-sources-rating-desc">
+            <div class="divs-in-search-results" id="container-title">
+                <h2> Title </h2>
+            </div>
 
-    <p class="boxed">
+            <div class="divs-in-search-results" id="box-sources">
+                <h3>Where To Watch :</h3>
+            </div>
 
-    </p>
+            <div class="divs-in-search-results" >
+                <li id="movies-list">
+                    <ul>Netflix</ul>
+                    <ul>Hbo</ul>
+                    <ul>Hulu</ul>
+                    <ul>Vudu</ul>
+                    <ul>Netflix</ul>
+                </li>
+            </div>
+
+            <div class="divs-in-search-results" id="movie-description">
+                <p>Yoyoyoyoyoyoyyoyo</p>
+            </div>
+        </div>
+
+        Right half of search-results
+        <div>
+            <img>
+        </div>
+
+    </div> -->
 
 </body>
 
