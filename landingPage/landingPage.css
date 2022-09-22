@@ -107,7 +107,6 @@ body {
     justify-content: center;
     width: 430px;
     height: 38px;
-    color: white;
     border-radius: 25px 0px 0px 25px;
     border: 0 solid black;
     /* margin-top: 180px; */
@@ -131,7 +130,7 @@ body {
     /* margin-left: 15px; */
 }
 
-#search-results {
+.search-results {
     display: flex;
     flex-direction: row;
     /* height: auto;
@@ -147,7 +146,7 @@ body {
     /* text-align: center; */
 }
 
-#title-sources-rating-desc {
+.title-sources-rating-desc {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -169,7 +168,7 @@ body {
     margin: 5%;
 }
 
-#container-title {
+.movie--title {
     /* position: absolute; */
     /* margin-bottom: 30px; */
     text-align: center;
