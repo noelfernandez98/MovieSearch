@@ -61,16 +61,16 @@ if (navigator.geolocation) {
                     // console.log(response.results); // Entire response array with results
 
                     // Console.log all title name results up to 10 
-                    let length = 2 < response.results.length ? 2 : response.results.length;
+                    let length = 9 < response.results.length ? 9 : response.results.length;
                     for (let i = 0; i < length; i++) {
-                        console.log(i)
+                        console.log(i);
                         //create dynamic cards
                         //big countainer
                         let bigCountainer = document.createElement("div");
                         console.log(bigCountainer)
                         bigCountainer.setAttribute('class', 'search-results');
                         bigCountainer.setAttribute('id',`search-results${i}`)
-                        document.body.append(bigCountainer);
+                        document.getElementById("parent-div").append(bigCountainer);
 
                         //create children for big countainer
                         let titleSourcesRatingsDesc = document.createElement("div");
@@ -79,7 +79,7 @@ if (navigator.geolocation) {
                         let movieImg = document.createElement("div");
                         movieImg.setAttribute('class', 'movie-img');
                         movieImg.setAttribute('id', `movie-img${i}`)
-                        document.getElementById(`search-results${i}`).append(titleSourcesRatingsDesc, movieImg);
+                        document.getElementById(`search-results${i}`).append(movieImg, titleSourcesRatingsDesc);
 
                         //create childrends children (right and left side div chiildren)
                         //right side
