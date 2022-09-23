@@ -175,6 +175,23 @@ body {
     /* left: 30%; */
 }
 
+.source-logo, .source-link {
+    border-radius: 10%;
+    width: 5%;
+    
+
+}
+
+.source-logo {
+       
+    /* padding: 0% 20px;  */
+    border: 1px solid black;
+}
+
+.material-symbols-outlined:hover{
+    cursor: pointer
+}
+
 /* #box-sources { */
     /* position: absolute; */
     /* bottom: 60% */

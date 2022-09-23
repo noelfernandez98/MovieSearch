@@ -127,29 +127,46 @@ if (navigator.geolocation) {
                 })
         }
 
+        // This function takes a given plot summary and shortens it to display only 120 characters
+        const setDescriptionLength = (plotSummary) => {
+            if (plotSummary.length > 120) return `${plotSummary.slice(0, 120)} ...`
+        }
+
         // Fetch Title Details - Title Source - Title Rating - Title Img Icon
         const fetchTitleDetails = (titleId, moviesDescElement, sourcesListElement, movieImgElement,) => {
             console.log(movieImgElement, moviesDescElement, sourcesListElement)
             fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=EjUu4qpEoUSvrHa3oHqZD1bB39zYdP1OWvAon5rY&append_to_response=sources`)
                 .then(data => data.json())
                 .then(response => {
-                    //left side
-                    //left blank
                     console.log(response)
                     //movie Desc
                     let desc = document.createElement("p");
-                    desc.innerText = ""                                 //left blank
-                    document.body.getElementsByClassName("movie-desc")[0].append(desc);
+                    desc.innerText = setDescriptionLength(response.plot_overview)
+                    moviesDescElement.appendChild(desc)
+
+                    //Show the rest of the plot summary
+                    let showMoreButton = document.createElement("SPAN")
+                    showMoreButton.setAttribute("class", "material-symbols-outlined")
+                    showMoreButton.innerHTML = 'arrow_drop_down'
+                    desc.insertAdjacentElement("afterend", showMoreButton);
+                    showMoreButton.addEventListener("click", (e) => {
+                        e.preventDefault()
+                        if (desc.innerText.length < 126) {
+                            desc.innerText = response.plot_overview
+                        } else {
+                            desc.innerText = setDescriptionLength(response.plot_overview)
+                        }
+                    })
+
 
                     let arrSources = removeRepeatSources(response.sources)
-                    console.log(arrSources)
-                    // let titleSourcesList = document.createElement("ul")
-
                     let length = 4 < arrSources.length ? 4 : arrSources.length;
                     for (let i = 0; i < length; i++) {
                         // sources (netflix, hulu, vudu ....)
                         let aTagImg = document.createElement("a")
                         let sources = document.createElement("img");
+                        sources.setAttribute('class', 'source-logo')
+                        aTagImg.setAttribute('class', 'source-link')
                         aTagImg.setAttribute("target", "_blank")
                         aTagImg.appendChild(sources)
                         sourcesListElement.append(aTagImg);
@@ -165,7 +182,6 @@ if (navigator.geolocation) {
                     movieImgElement.append(img);
 
                     // titleRating.innerText = response.user_rating // ADD LATER
-                    // console.log(titleSourcesList)
                     // console.log(titleRating)
                 })
         }
