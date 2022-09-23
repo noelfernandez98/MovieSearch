@@ -197,7 +197,7 @@ body {
     /* position: absolute; */
     /* margin-bottom: 30px; */
     /* text-align: center; */
-    /* font-family: 'Lora', serif; */
+    font-family: 'Lora', serif;
     font-family: 'Oswald', sans-serif;
     font-size: medium;
     
@@ -217,6 +217,23 @@ img {
 
 }
 
+
+.source-logo, .source-link {
+    border-radius: 10%;
+    width: 5%;
+    
+
+}
+
+.source-logo {
+       
+    /* padding: 0% 20px;  */
+    border: 1px solid black;
+}
+
+.material-symbols-outlined:hover{
+    cursor: pointer
+}
 
 
 /* #box-sources { */
