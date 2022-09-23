@@ -34,8 +34,12 @@ if (navigator.geolocation) {
         // This function removes repeated sources from source array 
         const removeRepeatSources = (source) => {
             let arr = []
+            let name = []
             for (let i = 0; i < source.length; i++) {
-                if (!arr.includes(source[i].name)) arr.push(source[i].name)
+                if (!name.includes(source[i].name)) {
+                    name.push(source[i].name)
+                    arr.push(source[i])
+                }
             }
             return arr
         }
@@ -116,10 +120,8 @@ if (navigator.geolocation) {
             fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=EjUu4qpEoUSvrHa3oHqZD1bB39zYdP1OWvAon5rY&append_to_response=sources`)
                 .then(data => data.json())
                 .then(response => {
-
                     //left side
                     //left blank
-
                     console.log(response)
                     //movie Desc
                     let desc = document.createElement("p");
@@ -133,10 +135,19 @@ if (navigator.geolocation) {
                     let length = 4 < arrSources.length ? 4 : arrSources.length;
                     for (let i = 0; i < length; i++) {
                         // sources (netflix, hulu, vudu ....)
-                        let sources = document.createElement("li");
-                        sourcesListElement.append(sources);
-                        sources.innerText = arrSources[i]
-                        sourcesListElement.appendChild(sources)
+
+                        let aTagImg = document.createElement("a")
+                        let sources = document.createElement("img");
+                        aTagImg.appendChild(sources)
+                        sourcesListElement.append(aTagImg);
+                        sources.src = sourceObj[`${arrSources[i].source_id}`]
+                        aTagImg.href = arrSources[i].web_url
+                        // sourcesListElement.appendChild(sources)
+
+                        // let sources = document.createElement("img")
+                        // sourcesListElement.append(sources)
+                        // sources.src = arrSources[i].web_url
+
                     }
 
                     // let titleRating = document.createElement("li") // ADD LATER
@@ -159,6 +170,19 @@ if (navigator.geolocation) {
             str = strWithUrlFormat(input.value)
             // console.log(str);
             fetchData(str);
+        })
+
+
+        let sourceObj = {}
+
+        fetch('https://api.watchmode.com/v1/sources/?apiKey=EjUu4qpEoUSvrHa3oHqZD1bB39zYdP1OWvAon5rY')
+        .then(data => data.json())
+        .then(response => {
+            console.log(response)
+            for(let i = 0; i < response.length; i++) {
+                sourceObj[`${response[i].id}`] = response[i].logo_100px
+            }
+            console.log(sourceObj)
         })
     })
 }
