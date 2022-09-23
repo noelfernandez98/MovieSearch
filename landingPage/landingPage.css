@@ -172,6 +172,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    flex-grow: 1;
     /* padding-right:1%; */
     background-color: #c0c0c0;
     /* height: auto;
@@ -187,6 +188,12 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+.sources-list {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
 }
 
 /* .divs-in-search-results {
@@ -220,7 +227,11 @@ img {
 
 .source-logo, .source-link {
     border-radius: 10%;
-    width: 5%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
     
 
 }

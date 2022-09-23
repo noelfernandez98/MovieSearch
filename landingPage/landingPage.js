@@ -54,7 +54,7 @@ if (navigator.geolocation) {
 
         // This fetch wll get the list of sources info and store it in sourceObj. Key : Value => (idNum : logoUrl)
         const storeSources = () => {
-            fetch('https://api.watchmode.com/v1/sources/?apiKey=EjUu4qpEoUSvrHa3oHqZD1bB39zYdP1OWvAon5rY')
+            fetch('https://api.watchmode.com/v1/sources/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba')
                 .then(data => data.json())
                 .then(response => {
                     for (let i = 0; i < response.length; i++) {
@@ -66,7 +66,7 @@ if (navigator.geolocation) {
 
         // Fetch possible movie title results
         const fetchData = (string) => {
-            fetch(`https://api.watchmode.com/v1/autocomplete-search/?apiKey=EjUu4qpEoUSvrHa3oHqZD1bB39zYdP1OWvAon5rY&search_field=name&search_value=${string}`)
+            fetch(`https://api.watchmode.com/v1/autocomplete-search/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&search_field=name&search_value=${string}`)
                 .then(data => data.json())
                 .then(response => {
 
@@ -136,7 +136,7 @@ if (navigator.geolocation) {
         // Fetch Title Details - Title Source - Title Rating - Title Img Icon
         const fetchTitleDetails = (titleId, moviesDescElement, sourcesListElement, movieImgElement,) => {
             console.log(movieImgElement, moviesDescElement, sourcesListElement)
-            fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=EjUu4qpEoUSvrHa3oHqZD1bB39zYdP1OWvAon5rY&append_to_response=sources`)
+            fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&append_to_response=sources`)
                 .then(data => data.json())
                 .then(response => {
                     console.log(response)
