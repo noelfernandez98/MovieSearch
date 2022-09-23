@@ -4,6 +4,7 @@ let input = document.getElementById("search");
 let str = "tokyoDrift";
 let newStr = ""
 let countryCode;
+let sourceObj = {}
 
 //get user location for region results
 if (navigator.geolocation) {
@@ -49,6 +50,18 @@ if (navigator.geolocation) {
             const element = Array.from(document.getElementsByClassName("search-results"))
             console.log(element)
             if (element.length > 0) element.forEach(x => x.remove())
+        }
+
+        // This fetch wll get the list of sources info and store it in sourceObj. Key : Value => (idNum : logoUrl)
+        const storeSources = () => {
+            fetch('https://api.watchmode.com/v1/sources/?apiKey=EjUu4qpEoUSvrHa3oHqZD1bB39zYdP1OWvAon5rY')
+                .then(data => data.json())
+                .then(response => {
+                    for (let i = 0; i < response.length; i++) {
+                        sourceObj[`${response[i].id}`] = response[i].logo_100px
+                    }
+                    console.log(sourceObj)
+                })
         }
 
         // Fetch possible movie title results
@@ -103,7 +116,7 @@ if (navigator.geolocation) {
 
                         //where to watch H3
                         let whereToWatchH3 = document.createElement("h3");
-                        whereToWatchH3.innerText = "Where to Watch"                  
+                        whereToWatchH3.innerText = "Where to Watch"
                         document.getElementById(`where-to-watch${i}`).append(whereToWatchH3);
 
                         let id = response.results[i].id
@@ -135,24 +148,18 @@ if (navigator.geolocation) {
                     let length = 4 < arrSources.length ? 4 : arrSources.length;
                     for (let i = 0; i < length; i++) {
                         // sources (netflix, hulu, vudu ....)
-
                         let aTagImg = document.createElement("a")
                         let sources = document.createElement("img");
+                        aTagImg.setAttribute("target", "_blank")
                         aTagImg.appendChild(sources)
                         sourcesListElement.append(aTagImg);
                         sources.src = sourceObj[`${arrSources[i].source_id}`]
                         aTagImg.href = arrSources[i].web_url
-                        // sourcesListElement.appendChild(sources)
-
-                        // let sources = document.createElement("img")
-                        // sourcesListElement.append(sources)
-                        // sources.src = arrSources[i].web_url
-
                     }
 
                     // let titleRating = document.createElement("li") // ADD LATER
 
-                    //img
+                    // Movie Poster Img
                     let img = document.createElement("img");
                     img.setAttribute('src', `${response.poster}`);
                     movieImgElement.append(img);
@@ -166,23 +173,11 @@ if (navigator.geolocation) {
         // Event Listener for Submit Button
         submitBtn.addEventListener("click", (e) => {
             e.preventDefault();
+            storeSources();
             removePreviousResults();
             str = strWithUrlFormat(input.value)
             // console.log(str);
             fetchData(str);
-        })
-
-
-        let sourceObj = {}
-
-        fetch('https://api.watchmode.com/v1/sources/?apiKey=EjUu4qpEoUSvrHa3oHqZD1bB39zYdP1OWvAon5rY')
-        .then(data => data.json())
-        .then(response => {
-            console.log(response)
-            for(let i = 0; i < response.length; i++) {
-                sourceObj[`${response[i].id}`] = response[i].logo_100px
-            }
-            console.log(sourceObj)
         })
     })
 }
