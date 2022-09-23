@@ -1,11 +1,9 @@
 // DOM elements
 let submitBtn = document.getElementById("submitBtn");
 let input = document.getElementById("search");
-// let searchResults = document.getElementById("search-results")
 let str = "tokyoDrift";
 let newStr = ""
 let countryCode;
-
 
 //get user location for region results
 if (navigator.geolocation) {
@@ -49,9 +47,6 @@ if (navigator.geolocation) {
             if (element.length > 0) element.forEach(x => x.remove())
         }
 
-        //
-
-
         // Fetch possible movie title results
         const fetchData = (string) => {
             fetch(`https://api.watchmode.com/v1/autocomplete-search/?apiKey=EjUu4qpEoUSvrHa3oHqZD1bB39zYdP1OWvAon5rY&search_field=name&search_value=${string}`)
@@ -59,8 +54,8 @@ if (navigator.geolocation) {
                 .then(response => {
 
                     // console.log(response.results); // Entire response array with results
-
                     // Console.log all title name results up to 10 
+
                     let length = 2 < response.results.length ? 2 : response.results.length;
                     for (let i = 0; i < length; i++) {
                         console.log(i)
@@ -69,7 +64,7 @@ if (navigator.geolocation) {
                         let bigCountainer = document.createElement("div");
                         console.log(bigCountainer)
                         bigCountainer.setAttribute('class', 'search-results');
-                        bigCountainer.setAttribute('id',`search-results${i}`)
+                        bigCountainer.setAttribute('id', `search-results${i}`)
                         document.body.append(bigCountainer);
 
                         //create children for big countainer
@@ -88,6 +83,7 @@ if (navigator.geolocation) {
                         titleDiv.setAttribute('id', `movie-title${i}`)
                         let whereToWatch = document.createElement("div");
                         whereToWatch.setAttribute('class', 'where-to-watch');
+                        whereToWatch.setAttribute('id', `where-to-watch${i}`)
                         let sourcesList = document.createElement("div");
                         sourcesList.setAttribute('class', 'sources-list');
                         sourcesList.setAttribute('id', `${i}`) // Set by id iteration
@@ -98,18 +94,16 @@ if (navigator.geolocation) {
 
                         //title 
                         let title = document.createElement("h2");
-                        title.innerText = " "                               //left blank
+                        title.innerText = response.results[i].name                   //left blank
                         document.getElementById(`movie-title${i}`).append(title);
+
                         //where to watch H3
                         let whereToWatchH3 = document.createElement("h3");
-                        whereToWatchH3.innerText = " "                      //left blank
-                        document.getElementsByClassName("where-to-watch")[0].append(whereToWatchH3);
+                        whereToWatchH3.innerText = "Where to Watch"                  
+                        document.getElementById(`where-to-watch${i}`).append(whereToWatchH3);
 
                         let id = response.results[i].id
                         // console.log(id)
-                        title.innerText = response.results[i].name
-                        // titleName.classList.add("title-result1")
-                        // bigCountainer.appendChild(titleName)
                         // console.log(response.results[i].name);
                         fetchTitleDetails(id, movieDesc, sourcesList, movieImg)
                     }
@@ -132,25 +126,18 @@ if (navigator.geolocation) {
                     desc.innerText = ""                                 //left blank
                     document.body.getElementsByClassName("movie-desc")[0].append(desc);
 
-                    // console.log(response)
                     let arrSources = removeRepeatSources(response.sources)
                     console.log(arrSources)
                     // let titleSourcesList = document.createElement("ul")
 
                     let length = 4 < arrSources.length ? 4 : arrSources.length;
-
-                    let sourceId = 0
                     for (let i = 0; i < length; i++) {
                         // sources (netflix, hulu, vudu ....)
                         let sources = document.createElement("li");
-                        // document.getElementById(sourceId).append(sources);
                         sourcesListElement.append(sources);
-                        sourceId++
                         sources.innerText = arrSources[i]
-
                         sourcesListElement.appendChild(sources)
                     }
-
 
                     // let titleRating = document.createElement("li") // ADD LATER
 
@@ -163,7 +150,6 @@ if (navigator.geolocation) {
                     // console.log(titleSourcesList)
                     // console.log(titleRating)
                 })
-
         }
 
         // Event Listener for Submit Button
