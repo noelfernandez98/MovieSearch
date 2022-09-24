@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&family=Oswald&display=swap');
+
 
 * {
     margin: 0;
@@ -107,7 +110,6 @@ body {
     justify-content: center;
     width: 430px;
     height: 38px;
-    color: white;
     border-radius: 25px 0px 0px 25px;
     border: 0 solid black;
     /* margin-top: 180px; */
@@ -131,31 +133,54 @@ body {
     /* margin-left: 15px; */
 }
 
-#search-results {
+#parent-div {
     display: flex;
+    width: 86%;
+    height: auto;
     flex-direction: row;
-    /* height: auto;
-    width: auto; */
-    width: 65%;
-    height: 30%;
-    background-color: #4f4634;
-    margin-left: auto;
-    margin-right: auto;
-    /* padding: 30px 70px; */
-    margin-top: 4%;
-    /* border-radius: 25px; */
-    /* text-align: center; */
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-right: 4%;
+    padding-left: 4%;
+    
+
 }
 
-#title-sources-rating-desc {
+.search-results {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #FF0000;
     /* height: auto;
     width: auto; */
-    width: 60%;
-    height: 30%;
+    width: 20%;
+    /* height: 30%; */
+    height: auto;
+    margin-left: 3%;
+    margin-right: 3;
+    background-color: #4f4634;
+    /* margin-left: auto;
+    margin-right: auto; */
+    /* padding: 30px 70px; */
+    margin-top: 6%;
+    border-radius: 5px;
+    /* text-align: center; */
+    /* flex: 0 0 33.333333%; */
+}
+
+.title-sources-rating-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    /* padding-right:1%; */
+    background-color: #c0c0c0;
+    /* height: auto;
+    width: auto; */
+    width: 95%;
+    /* height: auto; */
+    border-radius: 0px 0px 5px 5px;
+    padding: 2px 5px;
 }
 
 #movies-list{
@@ -165,19 +190,68 @@ body {
     justify-content: space-evenly;
 }
 
-.divs-in-search-results {
-    margin: 5%;
+.sources-list {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
 }
 
-#container-title {
+/* .divs-in-search-results {
+    margin: 5%;
+} */
+
+.movie-title {
     /* position: absolute; */
     /* margin-bottom: 30px; */
-    text-align: center;
+    /* text-align: center; */
+    font-family: 'Lora', serif;
+    font-family: 'Oswald', sans-serif;
+    font-size: medium;
+    
     /* left: 30%; */
 }
+
+img {
+    display: flex;
+    
+    width: 97%;
+    height: 97%;
+    padding: 1.5%;
+    /* padding: 12% 5% 10% 5% ; */
+    /* border: white solid 1px; */
+    
+
+
+}
+
+
+.source-logo, .source-link {
+    border-radius: 10%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    
+
+}
+
+.source-logo {
+       
+    /* padding: 0% 20px;  */
+    border: 1px solid black;
+}
+
+.material-symbols-outlined:hover{
+    cursor: pointer
+}
+
 
 /* #box-sources { */
     /* position: absolute; */
     /* bottom: 60% */
-
 /* } */
+
+/* img {
+    padding: 10px;
+} */
