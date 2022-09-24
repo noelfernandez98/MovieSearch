@@ -48,7 +48,6 @@ if (navigator.geolocation) {
         // This function gets all li elements(class = title-results) and removes them to make space for new searches
         const removePreviousResults = () => {
             const element = Array.from(document.getElementsByClassName("search-results"))
-            console.log(element)
             if (element.length > 0) element.forEach(x => x.remove())
         }
 
