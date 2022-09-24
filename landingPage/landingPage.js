@@ -198,3 +198,40 @@ if (navigator.geolocation) {
         })
     })
 }
+const movieSection = document.getElementsByClassName('movie-body')
+let trial = []
+
+  fetch(`https://api.watchmode.com/v1/list-titles/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&source_ids=203,57`)
+    .then(res => res.json())
+    .then(data => {
+        if (data) {
+            console.log(data, 'original data')
+        console.log(data.titles, 'movie titles')
+            for (let movie of data.titles) {
+                if (movie.year > 2021) {
+                    trial.push(movie.title)
+                    movieSection.innerText = movie.title
+                }
+            }
+        }
+            function getRandomMovies(trial){
+                console.log(trial, 'Logging')
+                let randomMovies = trial.sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 10)
+                console.log(randomMovies);
+                for(let i = 0; randomMovies.length; i++) {
+                   pTag = document.createElement('p')
+                   pTag.innerText = randomMovies[i]
+                    document.body.appendChild(pTag)
+                }
+            }
+            getRandomMovies(trial)
+
+    })
+    
+
+
+    // for(let i = 0; trial.length; i++) {
+    //     document.body.appendChild(randomMovies)
+    // }
+// fetching based on latest movies/rating
+
