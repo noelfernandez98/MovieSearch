@@ -4,7 +4,55 @@ let input = document.getElementById("search");
 let str = "tokyoDrift";
 let newStr = ""
 let countryCode;
-let sourceObj = {}
+let sourceObj = {};
+let currentYearMovies = [];
+let randomMoviesData = [];
+let recentSearch = [];
+
+//This function checks the given inputValue and converts it to URL code format if spaces are present
+const strWithUrlFormat = (inputValue) => {
+    let str = inputValue;
+    let newStr = "";
+    if (str.split(" ").length > 1) {
+        str = str.split(" ");
+        for (let i = 0; i < str.length - 1; i++) {
+            newStr += (str[i] + "%20");
+        }
+        newStr += str[str.length - 1];
+    }
+    if (newStr.length > 0) str = newStr
+    return str
+}
+
+// This function removes repeated sources from source array 
+const removeRepeatSources = (source) => {
+    let arr = []
+    let name = []
+    for (let i = 0; i < source.length; i++) {
+        if (!name.includes(source[i].name)) {
+            name.push(source[i].name)
+            arr.push(source[i])
+        }
+    }
+    return arr
+}
+
+// This function gets all li elements(class = title-results) and removes them to make space for new searches
+const removePreviousResults = () => {
+    const element = Array.from(document.getElementsByClassName("search-results"))
+    if (element.length > 0) element.forEach(x => x.remove())
+}
+
+// This fetch wll get the list of sources info and store it in sourceObj. Key : Value => (idNum : logoUrl)
+const storeSources = () => {
+    fetch('https://api.watchmode.com/v1/sources/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba')
+        .then(data => data.json())
+        .then(response => {
+            for (let i = 0; i < response.length; i++) {
+                sourceObj[`${response[i].id}`] = response[i].logo_100px
+            }
+        })
+}
 
 //get user location for region results
 if (navigator.geolocation) {
@@ -17,51 +65,6 @@ if (navigator.geolocation) {
             .then(res => res.json())
             .then(data => countryCode = data.countryCode)
 
-        //This function checks the given inputValue and converts it to URL code format if spaces are present
-        const strWithUrlFormat = (inputValue) => {
-            let str = inputValue;
-            let newStr = "";
-            if (str.split(" ").length > 1) {
-                str = str.split(" ");
-                for (let i = 0; i < str.length - 1; i++) {
-                    newStr += (str[i] + "%20");
-                }
-                newStr += str[str.length - 1];
-            }
-            if (newStr.length > 0) str = newStr
-            return str
-        }
-
-        // This function removes repeated sources from source array 
-        const removeRepeatSources = (source) => {
-            let arr = []
-            let name = []
-            for (let i = 0; i < source.length; i++) {
-                if (!name.includes(source[i].name)) {
-                    name.push(source[i].name)
-                    arr.push(source[i])
-                }
-            }
-            return arr
-        }
-
-        // This function gets all li elements(class = title-results) and removes them to make space for new searches
-        const removePreviousResults = () => {
-            const element = Array.from(document.getElementsByClassName("search-results"))
-            if (element.length > 0) element.forEach(x => x.remove())
-        }
-
-        // This fetch wll get the list of sources info and store it in sourceObj. Key : Value => (idNum : logoUrl)
-        const storeSources = () => {
-            fetch('https://api.watchmode.com/v1/sources/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba')
-                .then(data => data.json())
-                .then(response => {
-                    for (let i = 0; i < response.length; i++) {
-                        sourceObj[`${response[i].id}`] = response[i].logo_100px
-                    }
-                    console.log(sourceObj)
-                })
-        }
 
         // Fetch possible movie title results
         const fetchData = (string) => {
@@ -69,18 +72,18 @@ if (navigator.geolocation) {
                 .then(data => data.json())
                 .then(response => {
 
-                    // console.log(response.results); // Entire response array with results
-                    // Console.log all title name results up to 10 
-
-                    let length = 9 < response.results.length ? 9 : response.results.length;
+                    let length = 2 < response.results.length ? 2 : response.results.length;
                     for (let i = 0; i < length; i++) {
-                        console.log(i);
+
+                        // Store recent search data
+                        recentSearch.push(response.results[i])
+
+
                         //create dynamic cards
                         //big countainer
                         let bigCountainer = document.createElement("div");
-                        console.log(bigCountainer)
                         bigCountainer.setAttribute('class', 'search-results');
-                        bigCountainer.setAttribute('id',`search-results${i}`)
+                        bigCountainer.setAttribute('id', `search-results${i}`)
                         document.getElementById("parent-div").append(bigCountainer);
 
 
@@ -120,9 +123,8 @@ if (navigator.geolocation) {
                         document.getElementById(`where-to-watch${i}`).append(whereToWatchH3);
 
                         let id = response.results[i].id
-                        // console.log(id)
-                        // console.log(response.results[i].name);
-                        fetchTitleDetails(id, movieDesc, sourcesList, movieImg)
+
+                        fetchTitleDetails(id, movieDesc, sourcesList, movieImg, i)
                     }
                 })
         }
@@ -133,12 +135,15 @@ if (navigator.geolocation) {
         }
 
         // Fetch Title Details - Title Source - Title Rating - Title Img Icon
-        const fetchTitleDetails = (titleId, moviesDescElement, sourcesListElement, movieImgElement,) => {
-            console.log(movieImgElement, moviesDescElement, sourcesListElement)
+        const fetchTitleDetails = (titleId, moviesDescElement, sourcesListElement, movieImgElement, indexPosition) => {
             fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&append_to_response=sources`)
                 .then(data => data.json())
                 .then(response => {
-                    console.log(response)
+
+                    // Store title details data into recentSearch data
+                    recentSearch[indexPosition].titleDetails = response
+                    recentSearch[indexPosition].titleDetails.sources = removeRepeatSources(response.sources)
+
                     //movie Desc
                     let desc = document.createElement("p");
                     desc.innerText = setDescriptionLength(response.plot_overview)
@@ -182,7 +187,6 @@ if (navigator.geolocation) {
                     movieImgElement.append(img);
 
                     // titleRating.innerText = response.user_rating // ADD LATER
-                    // console.log(titleRating)
                 })
         }
 
@@ -192,45 +196,38 @@ if (navigator.geolocation) {
             storeSources();
             removePreviousResults();
             str = strWithUrlFormat(input.value)
-            // console.log(str);
             fetchData(str);
+            console.log(recentSearch, "RecentSearch with title details")
         })
     })
 }
-const movieSection = document.getElementsByClassName('movie-body')
-let trial = []
 
-  fetch(`https://api.watchmode.com/v1/list-titles/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&source_ids=203,57`)
+const movieSection = document.getElementById('movie-body')
+
+fetch(`https://api.watchmode.com/v1/list-titles/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&sort_by=popularity_desc`)
     .then(res => res.json())
     .then(data => {
-        if (data) {
-            console.log(data, 'original data')
-        console.log(data.titles, 'movie titles')
-            for (let movie of data.titles) {
-                if (movie.year > 2021) {
-                    trial.push(movie.title)
-                    movieSection.innerText = movie.title
-                }
-            }
+
+        // Push 2022 movies to currentYearMovies
+        for (let movie of data.titles) {
+            if (movie.year > 2021) currentYearMovies.push(movie)
         }
-            function getRandomMovies(trial){
-                console.log(trial, 'Logging')
-                let randomMovies = trial.sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 10)
-                console.log(randomMovies);
-                for(let i = 0; randomMovies.length; i++) {
-                   pTag = document.createElement('p')
-                   pTag.innerText = randomMovies[i]
-                    document.body.appendChild(pTag)
-                }
-            }
-            getRandomMovies(trial)
+
+        // Get random 10 movies and assign data to randomMoviesData array
+        randomMoviesData = [...currentYearMovies].sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 2)
+
+        // Iterate through randomMoviesData and fetch title details of each title. Add title details data to each element of array
+        for (let i = 0; i < randomMoviesData.length; i++) {
+
+            // Fetch title details for each movie in randomMovie array
+            fetch(`https://api.watchmode.com/v1/title/${randomMoviesData[i].id}/details/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&append_to_response=sources`)
+                .then(data => data.json())
+                .then(response => {
+                    randomMoviesData[i].titleDetails = response
+                    randomMoviesData[i].titleDetails.sources = removeRepeatSources(response.sources)
+                })
+        }
+        console.log(randomMoviesData, "RandomMoviesData with title details")
 
     })
-    
-
-
-    // for(let i = 0; trial.length; i++) {
-    //     document.body.appendChild(randomMovies)
-    // }
-// fetching based on latest movies/rating
 
