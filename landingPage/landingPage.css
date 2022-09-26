@@ -196,9 +196,12 @@ body {
     padding: 10px;
 }
 
-/* .divs-in-search-results {
-    margin: 5%;
-} */
+.movie-desc {
+    display: flex; 
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
 
 .movie-title {
     /* position: absolute; */
@@ -239,13 +242,131 @@ img {
 .source-logo {
        
     /* padding: 0% 20px;  */
-    border: 1px solid black;
+    border: 1px solid white;
 }
 
 .material-symbols-outlined:hover{
     cursor: pointer
 }
 
+#carousel-parent{
+    display:flex;
+    /* align-items: center; */
+    position: fixed;
+    bottom: 35%;
+    /* justify-content: center; */
+    flex-direction: row;
+    width: 98%;
+    margin-left: 1%;
+    height: 40%;
+    /* border: blue 2px solid; */
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#carousel-child {
+    /* position:fixed; */
+    /* bottom: 24%; */
+    display: flex;
+    /* width: 94%; */
+    /* height:92%; */
+    align-items: center;
+    justify-content:space-evenly;
+    flex-direction: column;
+    background-color: #1E1E1E;
+    /* border: red 2px solid; */
+    color: white;
+    /* padding-top: 2%; */
+    padding-bottom: 2%;
+    
+}
+
+#carousel-imgs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+    height: 70%;
+    position: relative;
+    
+}
+
+.material-symbols-outlined {
+    color:white;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+
+
+/* body {
+    overflow-x: hidden;
+} */
+
+.list {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.list li {
+    list-style-type: none;
+    width: 200px;
+    height: 200px;
+    opacity: .25;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    border-radius: 2px;
+    background: #9C89B8;
+    transition: transform .5s, opacity .5s;
+}
+
+.list .act {
+    opacity: 1;
+}
+
+.list .prev,
+.list .next {
+    cursor: pointer;
+}
+
+.list .prev {
+    transform: translateX(-220px) scale(.85);
+}
+
+.list .next {
+    transform: translateX(220px) scale(.85);
+}
+
+.list .hide {
+    transform: translateX(-420px) scale(.85);
+}
+
+.list .new-next {
+    transform: translateX(420px) scale(.85);
+}
+
+.list .hide,
+.list .new-next {
+    opacity: 0;
+    transition: opacity .5s, transform .5s;
+}
+
+.swipe {
+    width: 270px;
+    height: 200px;
+    position: absolute;
+    background-color: green;
+    border-radius: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
 
 /* #box-sources { */
     /* position: absolute; */

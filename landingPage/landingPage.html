@@ -10,7 +10,8 @@
     <link rel=“preconnect” href=“https://fonts.gstatic.com” crossorigin>
     <link href=“https://fonts.googleapis.com/css2?family=Bangers&display=swap” rel=“stylesheet”>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Document</title>
     <script src="landingPage.js" defer></script>
 </head>
@@ -18,21 +19,55 @@
 <body>
     <header class="header">
         <div class="inner_header">
-            <div class="logo_container">
-                <h1 id="M">MOVIE</h1>
-                <h1 id="S">SEARCH</h1>
-            </div>
+            <a href="landingPage.html">
+                <div class="logo_container">
+                    <h1 id="M">MOVIE</h1>
+                    <h1 id="S">SEARCH</h1>
+                </div>
+            </a>
         </div>
     </header>
 
 
     <form>
         <div id="searchBar">
-            <input type="text" id="search" name="search" size="35" placeholder="                               Search Movie titles or Actors/Actresses"
-                required>
+            <input type="text" id="search" name="search" size="35"
+                placeholder="     Search Movie titles or Actors/Actresses" required>
             <button id="submitBtn">Search</button>
         </div>
     </form>
+
+    <div id="carousel-parent">
+        <span class="material-symbols-outlined" id="back-button">arrow_back_ios</span>
+
+        <div id="carousel-child">
+            <ul class="list">
+                <li id="1" class="hide"><a href=""><img src="/03173903_poster_w185.jpg"></a></li>
+                <li id="2" class="prev"></li>
+                <li id="3" class="act"></li>
+                <li id="4" class="next"></li>
+                <li id="5" class="next new-next"></li>
+            </ul>
+
+            <div class="swipe"></div>
+
+            <script src="https://hammerjs.github.io/dist/hammer.js"></script>
+
+            <!-- <div id="carousel-imgs">
+                <div class="img-sm"><a href=""><img src="/03173903_poster_w185.jpg" ></a></div>
+                <div class="img-sm"><a href=""><img src="/03173903_poster_w185.jpg" ></a></div>
+                <div class="img-sm"><a href=""><img src="/03173903_poster_w185.jpg" ></a></div>
+                <div class="img-lg"><a href=""><img src="/03173903_poster_w185.jpg"></a></div>
+                <div class="img-sm"><a href=""><img src="/03173903_poster_w185.jpg" ></a></div>
+                <div class="img-sm"><a href=""><img src="/03173903_poster_w185.jpg" ></a></div>
+                <div class="img-sm"><a href=""><img src="/03173903_poster_w185.jpg" ></a></div>
+            </div> -->
+
+
+        </div>
+
+        <span class="material-symbols-outlined" id="next-button">arrow_forward_ios</span>
+    </div>
 
 
     <div id="parent-div">
