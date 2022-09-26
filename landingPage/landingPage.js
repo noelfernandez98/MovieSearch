@@ -45,7 +45,7 @@ const removePreviousResults = () => {
 
 // This fetch wll get the list of sources info and store it in sourceObj. Key : Value => (idNum : logoUrl)
 const storeSources = () => {
-    fetch('https://api.watchmode.com/v1/sources/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba')
+    fetch('https://api.watchmode.com/v1/sources/?apiKey=BeYmB9mryTzzRDUeExGMh9M081rfrAsQ6XrHSdin')
         .then(data => data.json())
         .then(response => {
             for (let i = 0; i < response.length; i++) {
@@ -71,89 +71,97 @@ const storeSources = () => {
 //     console.log("hello")
 // })
 
-const func = selector => {
-    return document.querySelector(selector);
-};
+// const func = selector => {
+//     return document.querySelector(selector);
+// };
 
-function next() {
-    if (func(".hide")) {
-        func(".hide").remove();
-    }
+// function next() {
+//     if (func(".hide")) {
+//         func(".hide").remove();
+//     }
 
-    /* Step */
+//     /* Step */
 
-    if (func(".prev")) {
-        func(".prev").classList.add("hide");
-        func(".prev").classList.remove("prev");
-    }
+//     // hide
+//     if (func(".prev")) {
+//         func(".prev").classList.add("hide");
+//         func(".prev").classList.remove("prev");
+//     }
 
-    func(".act").classList.add("prev");
-    func(".act").classList.remove("act");
+//     // prev
+//     func(".act").classList.add("prev");
+//     func(".act").classList.remove("act");
 
-    func(".next").classList.add("act");
-    func(".next").classList.remove("next");
+//     // act
+//     func(".next").classList.add("act");
+//     let a = document.createElement("a")
+//     let img = document.createElement("img")
+//     img.src = "/03173903_poster_w185.jpg"
+//     func("act").appendChild(a)
+//     a.appendChild(img)
+//     func(".next").classList.remove("next");
 
-    /* New Next */
+//     /* New Next */
 
-    func(".new-next").classList.remove("new-next");
+//     func(".new-next").classList.remove("new-next");
 
-    const addedEl = document.createElement('li');
+//     const addedEl = document.createElement('li');
 
-    func(".list").appendChild(addedEl);
-    addedEl.classList.add("next", "new-next");
-}
+//     func(".list").appendChild(addedEl);
+//     addedEl.classList.add("next", "new-next");
+// }
 
-function prev() {
-    func(".new-next").remove();
+// function prev() {
+//     func(".new-next").remove();
 
-    /* Step */
+//     /* Step */
 
-    func(".next").classList.add("new-next");
+//     func(".next").classList.add("new-next");
 
-    func(".act").classList.add("next");
-    func(".act").classList.remove("act");
+//     func(".act").classList.add("next");
+//     func(".act").classList.remove("act");
 
-    func(".prev").classList.add("act");
-    func(".prev").classList.remove("prev");
+//     func(".prev").classList.add("act");
+//     func(".prev").classList.remove("prev");
 
-    /* New Prev */
+//     /* New Prev */
 
-    func(".hide").classList.add("prev");
-    func(".hide").classList.remove("hide");
+//     func(".hide").classList.add("prev");
+//     func(".hide").classList.remove("hide");
 
-    const addedEl = document.createElement('li');
+//     const addedEl = document.createElement('li');
 
-    func(".list").insertBefore(addedEl, func(".list").firstChild);
-    addedEl.classList.add("hide");
-}
+//     func(".list").insertBefore(addedEl, func(".list").firstChild);
+//     addedEl.classList.add("hide");
+// }
 
-slide = element => {
-    /* Next slide */
+// const slide = element => {
+//     /* Next slide */
 
-    if (element.classList.contains('next')) {
-        next();
+//     if (element.classList.contains('next')) {
+//         next();
 
-        /* Previous slide */
+//         /* Previous slide */
 
-    } else if (element.classList.contains('prev')) {
-        prev();
-    }
-}
+//     } else if (element.classList.contains('prev')) {
+//         prev();
+//     }
+// }
 
-const slider = func(".list"),
-    swipe = new Hammer(func(".swipe"));
+// const slider = func(".list"),
+//     swipe = new Hammer(func(".swipe"));
 
-slider.onclick = event => {
-    slide(event.target);
-}
+// slider.onclick = event => {
+//     slide(event.target);
+// }
 
-swipe.on("swipeleft", (ev) => {
-    next();
-});
+// swipe.on("swipeleft", (ev) => {
+//     next();
+// });
 
-swipe.on("swiperight", (ev) => {
-    prev();
-});
+// swipe.on("swiperight", (ev) => {
+//     prev();
+// });
 
 // --------------------------------------------------------------------------------------------
 // get user location for region results
@@ -170,7 +178,7 @@ if (navigator.geolocation) {
 
         // Fetch possible movie title results
         const fetchData = (string) => {
-            fetch(`https://api.watchmode.com/v1/autocomplete-search/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&search_field=name&search_value=${string}`)
+            fetch(`https://api.watchmode.com/v1/autocomplete-search/?apiKey=BeYmB9mryTzzRDUeExGMh9M081rfrAsQ6XrHSdin&search_field=name&search_value=${string}`)
                 .then(data => data.json())
                 .then(response => {
 
@@ -238,7 +246,7 @@ if (navigator.geolocation) {
 
         // Fetch Title Details - Title Source - Title Rating - Title Img Icon
         const fetchTitleDetails = (titleId, moviesDescElement, sourcesListElement, movieImgElement, indexPosition) => {
-            fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&append_to_response=sources`)
+            fetch(`https://api.watchmode.com/v1/title/${titleId}/details/?apiKey=BeYmB9mryTzzRDUeExGMh9M081rfrAsQ6XrHSdin&append_to_response=sources`)
                 .then(data => data.json())
                 .then(response => {
 
@@ -294,7 +302,7 @@ if (navigator.geolocation) {
 
         // Event Listener for Submit Button
         submitBtn.addEventListener("click", (e) => {
-            document.getElementById("carousel-parent").style.display = 'none';
+            // document.getElementById("carousel-parent").style.display = 'none';
             e.preventDefault();
             storeSources();
             removePreviousResults();
@@ -310,7 +318,7 @@ let trial = [];
 
 const movieSection = document.getElementById('movie-body')
 
-fetch(`https://api.watchmode.com/v1/list-titles/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&sort_by=popularity_desc`)
+fetch(`https://api.watchmode.com/v1/list-titles/?apiKey=BeYmB9mryTzzRDUeExGMh9M081rfrAsQ6XrHSdin&sort_by=popularity_desc`)
 
     .then(res => res.json())
     .then(data => {
@@ -327,7 +335,7 @@ fetch(`https://api.watchmode.com/v1/list-titles/?apiKey=K7VgGv4tXHT84UFFngOBRlUt
         for (let i = 0; i < randomMoviesData.length; i++) {
 
             // Fetch title details for each movie in randomMovie array
-            fetch(`https://api.watchmode.com/v1/title/${randomMoviesData[i].id}/details/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&append_to_response=sources`)
+            fetch(`https://api.watchmode.com/v1/title/${randomMoviesData[i].id}/details/?apiKey=BeYmB9mryTzzRDUeExGMh9M081rfrAsQ6XrHSdin&append_to_response=sources`)
                 .then(data => data.json())
                 .then(response => {
                     randomMoviesData[i].titleDetails = response
