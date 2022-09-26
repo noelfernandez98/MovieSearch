@@ -54,7 +54,109 @@ const storeSources = () => {
         })
 }
 
-//get user location for region results
+//--------------------------------------------------------------------------------------------
+// let nextButton = document.getElementById("next-button")
+// let backButton = document.getElementById("back-button")
+// let track = document.getElementById("carousel-imgs")
+// let slides = Array.from(track.children);
+// const slideWidth = slides[0].getBoundingClientRect().width;
+// console.log(slideWidth);
+// const setSlidePosition = (slide, index) => {
+//     slide.style.left = slideWidth * index + 'px';
+// }
+
+// nextButton.addEventListener("click", e => {
+//     // slides.style.transform = "translateX(-200)";
+//     document.getElementById("movie-title").innerText = "solid 4px white";
+//     console.log("hello")
+// })
+
+const func = selector => {
+    return document.querySelector(selector);
+};
+
+function next() {
+    if (func(".hide")) {
+        func(".hide").remove();
+    }
+
+    /* Step */
+
+    if (func(".prev")) {
+        func(".prev").classList.add("hide");
+        func(".prev").classList.remove("prev");
+    }
+
+    func(".act").classList.add("prev");
+    func(".act").classList.remove("act");
+
+    func(".next").classList.add("act");
+    func(".next").classList.remove("next");
+
+    /* New Next */
+
+    func(".new-next").classList.remove("new-next");
+
+    const addedEl = document.createElement('li');
+
+    func(".list").appendChild(addedEl);
+    addedEl.classList.add("next", "new-next");
+}
+
+function prev() {
+    func(".new-next").remove();
+
+    /* Step */
+
+    func(".next").classList.add("new-next");
+
+    func(".act").classList.add("next");
+    func(".act").classList.remove("act");
+
+    func(".prev").classList.add("act");
+    func(".prev").classList.remove("prev");
+
+    /* New Prev */
+
+    func(".hide").classList.add("prev");
+    func(".hide").classList.remove("hide");
+
+    const addedEl = document.createElement('li');
+
+    func(".list").insertBefore(addedEl, func(".list").firstChild);
+    addedEl.classList.add("hide");
+}
+
+slide = element => {
+    /* Next slide */
+
+    if (element.classList.contains('next')) {
+        next();
+
+        /* Previous slide */
+
+    } else if (element.classList.contains('prev')) {
+        prev();
+    }
+}
+
+const slider = func(".list"),
+    swipe = new Hammer(func(".swipe"));
+
+slider.onclick = event => {
+    slide(event.target);
+}
+
+swipe.on("swipeleft", (ev) => {
+    next();
+});
+
+swipe.on("swiperight", (ev) => {
+    prev();
+});
+
+// --------------------------------------------------------------------------------------------
+// get user location for region results
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
         console.log('My General Position:', position);
@@ -192,6 +294,7 @@ if (navigator.geolocation) {
 
         // Event Listener for Submit Button
         submitBtn.addEventListener("click", (e) => {
+            document.getElementById("carousel-parent").style.display = 'none';
             e.preventDefault();
             storeSources();
             removePreviousResults();
@@ -202,9 +305,13 @@ if (navigator.geolocation) {
     })
 }
 
+
+let trial = [];
+
 const movieSection = document.getElementById('movie-body')
 
 fetch(`https://api.watchmode.com/v1/list-titles/?apiKey=K7VgGv4tXHT84UFFngOBRlUtRTjeKp2rgnnX4tba&sort_by=popularity_desc`)
+
     .then(res => res.json())
     .then(data => {
 
